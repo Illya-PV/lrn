@@ -1,0 +1,5 @@
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.csproj.AssemblyReference.cache
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.AssemblyInfoInputs.cache
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.AssemblyInfo.cs
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.csproj.CoreCompileInputs.cache
