@@ -16,7 +16,7 @@ namespace Learning.Dal
         public MongoDBService()
         {
             MongoClient mongoClient = new MongoClient("mongodb+srv://illia_pv:localhost1617@cluster0.nvlushg.mongodb.net/test");
-           _db = mongoClient.GetDatabase():
+            _db = mongoClient.GetDatabase(); ;
         }
     }
 }
