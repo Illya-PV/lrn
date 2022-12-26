@@ -1,5 +1,13 @@
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\bin\Debug\net6.0\mongocrypt.dll
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\bin\Debug\net6.0\Learning.Dal.deps.json
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\bin\Debug\net6.0\Learning.Dal.dll
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\bin\Debug\net6.0\Learning.Dal.pdb
 C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.csproj.AssemblyReference.cache
 C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.AssemblyInfoInputs.cache
 C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.AssemblyInfo.cs
 C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.csproj.CoreCompileInputs.cache
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.dll
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\refint\Learning.Dal.dll
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\Learning.Dal.pdb
+C:\Users\illia.pavlov\source\repos\Learning\Learning.Dal\obj\Debug\net6.0\ref\Learning.Dal.dll

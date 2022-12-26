@@ -1,28 +1,153 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Dal;
+using Learning.Dal.Models;
 using MongoDB.Driver;
-//using Learning.Dal;
+using Learning.Dal.Context;
+using Learning.Bll.Implementation;
 
+Random random = new Random();
+int RandomMoney = random.Next(20, 100);
+int randint = random.Next(1,5);
 
-string connectingString = "mongodb://127.0.0.1:27017";
-string DBname = "EStore";
-string collectionName = "Type";
-
-var item = new MongoClient(connectingString);
-var db = item.GetDatabase(DBname);
-var collection = db.GetCollection<MongoDBModel>(collectionName);
-
-var goods = new MongoDBModel { Name = "computer mouse", Count = 200, Price = 1500, Type = "computer peripherals", Color = "White" };
-
-await collection.InsertOneAsync(goods);
-
-var results = await collection.FindAsync(_ => true);
-
-foreach (var result in results.ToList())
+ENames RandomNames()
 {
-    Console.WriteLine($"ID:{result.ID}\n Name:{result.Name}\n Price:{result.Price}\n" +
-        $" Count:{result.Count}\n Color:{result.Color}\n Type:{result.Type}:");
+    var rnd = new Random();
+    return (ENames)rnd.Next(Enum.GetNames(typeof(ENames)).Length);
 }
+
+ELastNames RandomLastNames()
+{
+    var rnd = new Random();
+    return (ELastNames)rnd.Next(Enum.GetNames(typeof(ELastNames)).Length);
+}
+
+
+
+var product = new ProductModel()
+{
+    ProductId = Guid.NewGuid(),
+    Price = -40,
+    Count = -20,
+    Name = "Headphones",
+    Type = "Computer_perifery",
+    Color = "white"
+};
+
+var product2 = new ProductModel()
+{
+    ProductId = Guid.NewGuid(),
+    Price = 240,
+    Count = 120,
+    Name = "keyboard",
+    Type = "Computer_perifery",
+    Color = "yellow"
+
+};
+
+var user = new UserModel()
+{
+    UserId = Guid.NewGuid(),
+    BankAccountId = Guid.NewGuid(),
+    FirstName = RandomNames().ToString(),
+    LastName = RandomLastNames().ToString(),
+    Email = "",
+    Password = "passsbwoed"
+
+};
+
+var user2 = new UserModel()
+{
+    UserId = Guid.NewGuid(),
+    BankAccountId = Guid.NewGuid(),
+    FirstName = RandomNames().ToString(),
+    LastName = RandomLastNames().ToString(),
+    Email = "sggggg@gmail.com",
+    Password = "passsdasdb"
+
+};
+
+var bank = new BankModel()
+{
+    BankAccountId = Guid.NewGuid(),
+    AmounOfMoney = random.Next(20, 100)
+};
+
+var bank2 = new BankModel()
+{
+    BankAccountId = Guid.NewGuid(),
+    AmounOfMoney = 100
+};
+
+var UPP = new UserPurchasedProductModel()
+{
+    UserId = Guid.NewGuid(),
+    TotalPrice = 10003,
+    ProductID = 3
+};
+
+
+
+
+UserService userService = new UserService();
+UserContext userContext = new UserContext();
+
+ProductService productService = new ProductService();
+ProductContext productContext = new ProductContext();
+
+BankService bankService = new BankService();
+BankContext bankContext = new BankContext();
+
+UserPurchasedProductContext userPurchasedProductContext = new UserPurchasedProductContext();
+UserPurchasedProductService userPurchasedProductService = new UserPurchasedProductService();
+
+//userPurchasedProductContext.DeleteUPPFromMongoDb(UPP);
+
+
+//userContext.DeleteUserFromMongoDb(user);//passed
+//userService.InsertUser(user);//passed
+//userContext.UpdateUserInMongoDb(user);//passed
+//userContext.DeleteCollection(user);//passed
+
+//userContext.ReadUserWithFilterFromMongoDb(user);//in progress
+
+
+Console.ForegroundColor = ConsoleColor.Green;
+Console.Write(randint);
+
+
+//userContext.InsertUserToMongoDb(user);
+//userService.DeleteUser(user);
+
+//Console.WriteLine(userContext.CollectionExistsAsync);
+
+bankService.InsertBank(bank);
+
+
+enum ENames
+{
+    Stepan,
+    Josh,
+    Barbara,
+    Enthony,
+    Sara,
+    Michle
+};
+
+enum ELastNames
+{
+    Bandera,
+    Martinez,
+    Rodriguez,
+    Davis,
+    Miller,
+    Garcia,
+    Jones ,
+    Smith,
+};
+
+
+

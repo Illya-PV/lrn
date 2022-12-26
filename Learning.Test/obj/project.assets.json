@@ -222,6 +222,36 @@
         "runtime": {
           "lib/net6.0/ZstdSharp.dll": {}
         }
+      },
+      "Learning.Bll/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Learning.Dal": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Learning.Bll.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Learning.Bll.dll": {}
+        }
+      },
+      "Learning.Dal/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DnsClient": "1.7.0",
+          "MongoDB.Bson": "2.18.0",
+          "MongoDB.Driver": "2.18.0",
+          "MongoDB.Driver.Core": "2.18.0",
+          "MongoDB.Libmongocrypt": "1.6.0"
+        },
+        "compile": {
+          "bin/placeholder/Learning.Dal.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Learning.Dal.dll": {}
+        }
       }
     }
   },
@@ -634,11 +664,23 @@
         "zstdsharp.port.0.6.2.nupkg.sha512",
         "zstdsharp.port.nuspec"
       ]
+    },
+    "Learning.Bll/1.0.0": {
+      "type": "project",
+      "path": "../Learning.Bll/Learning.Bll.csproj",
+      "msbuildProject": "../Learning.Bll/Learning.Bll.csproj"
+    },
+    "Learning.Dal/1.0.0": {
+      "type": "project",
+      "path": "../Learning.Dal/Learning.Dal.csproj",
+      "msbuildProject": "../Learning.Dal/Learning.Dal.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "DnsClient >= 1.7.0",
+      "Learning.Bll >= 1.0.0",
+      "Learning.Dal >= 1.0.0",
       "MongoDB.Bson >= 2.18.0",
       "MongoDB.Driver >= 2.18.0",
       "MongoDB.Driver.Core >= 2.18.0",
@@ -671,7 +713,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\illia.pavlov\\source\\repos\\Learning\\Learning.Bll\\Learning.Bll.csproj": {
+              "projectPath": "C:\\Users\\illia.pavlov\\source\\repos\\Learning\\Learning.Bll\\Learning.Bll.csproj"
+            },
+            "C:\\Users\\illia.pavlov\\source\\repos\\Learning\\Learning.Dal\\Learning.Dal.csproj": {
+              "projectPath": "C:\\Users\\illia.pavlov\\source\\repos\\Learning\\Learning.Dal\\Learning.Dal.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
