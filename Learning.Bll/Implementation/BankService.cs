@@ -7,12 +7,19 @@ using Learning.Dal;
 using Learning.Dal.Models;
 using Learning.Dal.Context;
 using Learning.Bll.Interfaces;
+using Learning.Dal.Intarfaces;
 
 namespace Learning.Bll.Implementation
 {
-    public class BankService:IBankService
+    public class BankService : IBankService
     {
-        BankContext? bankContext;
+        private IBankContext _bankContext;
+
+        public BankService(IBankContext bankContext) 
+        { 
+            _bankContext = bankContext;
+        }
+ 
 
         /// <summary>
         /// insert bank
@@ -28,7 +35,7 @@ namespace Learning.Bll.Implementation
             }
             else
             {
-                bankContext.InsertBankToMongoDb(bank);
+                _bankContext.InsertBankToMongoDb(bank);
                 Console.WriteLine($"bank:{bank} added successfully\n");
             }
             return bank;
@@ -40,7 +47,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public BankModel DeleteBank(BankModel bank) 
         {
-            bankContext.DeleteBankFromMongoDb(bank);
+            _bankContext.DeleteBankFromMongoDb(bank);
             return bank;
         }
         /// <summary>
@@ -50,7 +57,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public BankModel UpdateBank(BankModel bank) 
         {
-            bankContext.UpdateBankInMongoDb(bank);
+            _bankContext.UpdateBankInMongoDb(bank);
             return bank;
         }
         /// <summary>
@@ -58,10 +65,18 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public BankModel ReadBank(BankModel bank) 
+        public BankModel ReadBankById(Guid bankid) 
         {
-            bankContext.ReadBankFromMongoDb(bank);
-            return bank;
+            return _bankContext.ReadBankFromMongoDbById(bankid);
+            
+        }
+        public BankModel ReadBankByMoney(int amountOfMoney)
+        {
+            return _bankContext.ReadBankFromMongoDbByMoney(amountOfMoney);
+        }
+        public List<BankModel> GetAllBanks() 
+        {
+            return _bankContext.GetAllList();
         }
     }
 }

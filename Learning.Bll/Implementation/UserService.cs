@@ -1,6 +1,7 @@
 ﻿using Learning.Bll.Interfaces;
 using Learning.Dal;
 using Learning.Dal.Context;
+using Learning.Dal.Intarfaces;
 using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,12 @@ namespace Learning.Bll.Implementation
 {
     public class UserService:IUserService
     {
-        UserContext userContext;
+        private IUserContext _userContext;
+
+        public UserService(IUserContext userContext) 
+        { 
+            _userContext = userContext;
+        }
        
         /// <summary>
         /// insert validated user to mongoDB
@@ -49,7 +55,7 @@ namespace Learning.Bll.Implementation
             else
             {
                 Console.WriteLine($"user:{user} added successfully\n");
-                userContext.InsertUserToMongoDb(user);                              
+                _userContext.InsertUserToMongoDb(user);                              
             } 
             return user;
         }
@@ -58,23 +64,13 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel DeleteUser(UserModel user) 
+        public UserModel DeleteUser(UserModel user)
         {
             if (user.Email == "" || user.Email == " ")
             {
                 Console.WriteLine("DB doesn`t has such model");
             }
-            else { userContext.DeleteUserFromMongoDb(user); } 
-            return user;
-        }
-        /// <summary>
-        /// delete validated collection in mongoDB
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public UserModel DeleteCollection(UserModel user) 
-        {
-            userContext.DeleteCollection(user);
+            else { _userContext.DeleteUserFromMongoDb(user); }
             return user;
         }
         /// <summary>
@@ -84,7 +80,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public UserModel UpdateUser(UserModel user) 
         {
-            userContext.UpdateUserInMongoDb(user);
+            _userContext.UpdateUserInMongoDb(user);
             return user;
         }
         /// <summary>
@@ -94,7 +90,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public UserModel ReadUser(UserModel user) 
         {
-            userContext.ReadUserFromMongoDb(user);
+            _userContext.ReadUserFromMongoDb(user);
             return user;
         }
     }

@@ -4,14 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Dal;
-using Learning.Dal.Context;
 using Learning.Dal.Models;
+using Learning.Dal.Context;
+using Learning.Bll.Interfaces;
+using Learning.Dal.Intarfaces;
 
 namespace Learning.Bll.Implementation
 {
-    public class UserPurchasedProductServiceIUserPurchasedProductService
+    public class UserPurchasedProductService : IUserPurchasedProductService
     {
-        UserPurchasedProductContext uPP;
+        private IUserPurchasedProductContext _uPP;
+
+        public UserPurchasedProductService(IUserPurchasedProductContext userPurchasedProductContext) 
+        { 
+            _uPP = userPurchasedProductContext;
+            
+        }
 
         /// <summary>
         /// insert UserPurchasedProduct
@@ -25,7 +33,7 @@ namespace Learning.Bll.Implementation
             {
                 UserPurchasedProduct.TotalPrice = 0;
             }
-            else { uPP.InsertUPPToMongoDb(UserPurchasedProduct);}
+            else { _uPP.InsertUPPToMongoDb(UserPurchasedProduct);}
             return UserPurchasedProduct;
         }
         /// <summary>
@@ -35,7 +43,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public UserPurchasedProductModel DeleteUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
         {
-            uPP.DeleteUPPFromMongoDb(UserPurchasedProduct);
+            _uPP.DeleteUPPFromMongoDb(UserPurchasedProduct);
             return UserPurchasedProduct;
         }
         /// <summary>
@@ -45,7 +53,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public UserPurchasedProductModel UpdateUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
         {
-            uPP.UpdateUPPInMongoDb(UserPurchasedProduct);
+            _uPP.UpdateUPPInMongoDb(UserPurchasedProduct);
             return UserPurchasedProduct;
         }
         /// <summary>
@@ -55,7 +63,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public UserPurchasedProductModel ReadUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
         {
-            uPP.ReadUPPFromMongoDB(UserPurchasedProduct);
+            _uPP.ReadUPPFromMongoDB(UserPurchasedProduct);
             return UserPurchasedProduct;
         }
     }

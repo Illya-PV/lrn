@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using Learning.Dal.Models;
+using Learning.Dal.Intarfaces;
 
 namespace Learning.Dal.Context
 {
-    public class ProductContext
+    public class ProductContext:IProductContext
     {
         private IMongoDatabase _db;
 

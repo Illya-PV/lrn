@@ -13,7 +13,10 @@ namespace Learning.Bll.Interfaces
         BankModel InsertBank(BankModel bank);
         BankModel UpdateBank(BankModel bank);
         BankModel DeleteBank(BankModel bank);
-        BankModel ReadBank(BankModel bank);
+        BankModel ReadBankById(Guid bankid);
+        BankModel ReadBankByMoney(int amountOfMoney);
+        List<BankModel> GetAllBanks();
+
 
     }
 }

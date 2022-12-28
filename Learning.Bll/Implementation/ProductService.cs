@@ -1,6 +1,7 @@
 ﻿using Learning.Bll.Interfaces;
 using Learning.Dal;
 using Learning.Dal.Context;
+using Learning.Dal.Intarfaces;
 using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,12 @@ namespace Learning.Bll.Implementation
 {
     public class ProductService:IProductService
     {
-        ProductContext productContext;
+        private IProductContext _productContext;
+
+        public ProductService(IProductContext productContext) 
+        { 
+            _productContext = productContext;
+        }
 
         /// <summary>
         /// insert product
@@ -40,7 +46,7 @@ namespace Learning.Bll.Implementation
             }
             else
             {
-                productContext.InsertProductToMongoDb(product);
+                _productContext.InsertProductToMongoDb(product);
                 Console.WriteLine($"product:{product} added successfully\n");
             }
             return product;
@@ -52,7 +58,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public ProductModel DeleteProduct(ProductModel product) 
         {
-            productContext.DeleteProductFromMongoDb(product);
+            _productContext.DeleteProductFromMongoDb(product);
             return product;
         }
         /// <summary>
@@ -62,7 +68,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public ProductModel UpdateProduct(ProductModel product) 
         { 
-            productContext.UpdateProductInMongoDb(product);
+            _productContext.UpdateProductInMongoDb(product);
             return product;
         }
         /// <summary>
@@ -72,7 +78,7 @@ namespace Learning.Bll.Implementation
         /// <returns></returns>
         public ProductModel ReadProduct(ProductModel product) 
         {
-            productContext.ReadProductFromMongoDb(product);
+            _productContext.ReadProductFromMongoDb(product);
             return product;
         }
     }
