@@ -33,17 +33,32 @@ namespace Learning.Api.Controllers
             return new JsonResult(bank);
         }
         [Route("update-bank")]
-        [HttpPut]
+        [HttpPatch]
         public IActionResult UpdateBank([FromBody] BankModel bank)
         {
             _bankService.UpdateBank(bank);
             return new JsonResult(bank);
         }
-        [Route("read-bank")]
+        [Route("/{bankid}")]
         [HttpGet]
-        public IActionResult ReadBank([FromBody] BankModel bank)
+        public IActionResult ReadBankById(Guid bankid)
         {
-           _bankService.ReadBank(bank);
+           var bank = _bankService.ReadBankById(bankid);
+            return new JsonResult(bank);
+        }
+
+        [Route("bank-money")]
+        [HttpGet]
+        public IActionResult ReadBankByMoney(int amountOfMoney) 
+        { 
+            var bank = _bankService.ReadBankByMoney(amountOfMoney);
+            return new JsonResult(bank);
+        }
+        [Route("get-all-banks")]
+        [HttpGet]
+        public IActionResult GetAllBanks() 
+        { 
+            var bank = _bankService.GetAllBanks();
             return new JsonResult(bank);
         }
 

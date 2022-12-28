@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using Learning.Dal.Models;
 using MongoDB.Bson;
+using Learning.Dal.Intarfaces;
 
 namespace Learning.Dal.Context
 {
-    public class UserContext
+    public class UserContext:IUserContext
     {
         private IMongoDatabase _db;
 
@@ -41,15 +42,6 @@ namespace Learning.Dal.Context
             var collection = _db.GetCollection<UserModel>(UserCollectionName);
             var deleteFilter = Builders<UserModel>.Filter.Eq("Email","sbgmail.com");
             collection.DeleteOne(deleteFilter);
-        }
-        /// <summary>
-        /// delete collection from mongoDB
-        /// </summary>
-        /// <param name="user"></param>
-        public void DeleteCollection(UserModel user) 
-        {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName);
-            _db.DropCollection(UserCollectionName);
         }
         /// <summary>
         /// update user in mongoDB

@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using Learning.Dal.Models;
+using Learning.Dal.Intarfaces;
+
 namespace Learning.Dal.Context
 {
-    public class UserPurchasedProductContext
+    public class UserPurchasedProductContext:IUserPurchasedProductContext
     {
         private IMongoDatabase _db;
 
@@ -38,11 +40,6 @@ namespace Learning.Dal.Context
             var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
             var deleteFilter = Builders<UserPurchasedProductModel>.Filter.Eq("TotalPrice", 1200);
             collection.DeleteOne(deleteFilter);
-        }
-        public void DeleteCollection(UserPurchasedProductModel userPuechasedProduct)
-        {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            _db.DropCollection(UserPurchasedProductCollectionName);
         }
         /// <summary>
         /// update user`s purchased product to mongoDB

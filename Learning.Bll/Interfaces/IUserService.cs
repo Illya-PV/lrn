@@ -11,7 +11,6 @@ namespace Learning.Bll.Interfaces
     {
         UserModel InsertUser(UserModel user);
         UserModel DeleteUser(UserModel user);
-        UserModel DeleteCollection(UserModel user);
         UserModel UpdateUser(UserModel user);
         UserModel ReadUser(UserModel user);
     }

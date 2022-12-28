@@ -25,27 +25,47 @@ ELastNames RandomLastNames()
     return (ELastNames)rnd.Next(Enum.GetNames(typeof(ELastNames)).Length);
 }
 
+EColors RandomColors() 
+{
+    var rnd = new Random();
+    return (EColors)rnd.Next(Enum.GetNames(typeof(EColors)).Length);
+}
+
+EComputerPerifery RandomCP()
+{
+    var rnd = new Random();
+    return (EComputerPerifery)rnd.Next(Enum.GetNames(typeof(EComputerPerifery)).Length);
+}
 
 
-var product = new ProductModel()
+
+var product1 = new ProductModel()
 {
     ProductId = Guid.NewGuid(),
-    Price = -40,
-    Count = -20,
-    Name = "Headphones",
+    Price = random.Next(100, 200),
+    Count = random.Next(1, 20),
+    Name = RandomCP().ToString(),
     Type = "Computer_perifery",
-    Color = "white"
+    Color = RandomColors().ToString()
 };
 
 var product2 = new ProductModel()
 {
     ProductId = Guid.NewGuid(),
-    Price = 240,
-    Count = 120,
-    Name = "keyboard",
+    Price = random.Next(100, 200),
+    Count = random.Next(1, 20),
+    Name = RandomCP().ToString(),
     Type = "Computer_perifery",
-    Color = "yellow"
-
+    Color = RandomColors().ToString()
+};
+var product3 = new ProductModel()
+{
+    ProductId = Guid.NewGuid(),
+    Price = random.Next(100, 200),
+    Count = random.Next(1, 20),
+    Name = RandomCP().ToString(),
+    Type = "Computer_perifery",
+    Color = RandomColors().ToString()
 };
 
 var user = new UserModel()
@@ -89,8 +109,15 @@ var UPP = new UserPurchasedProductModel()
     ProductID = 3
 };
 
+var testid = new TestModel()
+{
+    SomeIDGuid = Guid.NewGuid(),
+    SomeIdInt = 1,
+    SomeIDStr = "1"
+};
 
 
+TestContext testC = new TestContext();
 
 UserService userService = new UserService();
 UserContext userContext = new UserContext();
@@ -102,7 +129,7 @@ BankService bankService = new BankService();
 BankContext bankContext = new BankContext();
 
 UserPurchasedProductContext userPurchasedProductContext = new UserPurchasedProductContext();
-UserPurchasedProductService userPurchasedProductService = new UserPurchasedProductService();
+//UserPurchasedProductService userPurchasedProductService = new UserPurchasedProductService();
 
 //userPurchasedProductContext.DeleteUPPFromMongoDb(UPP);
 
@@ -118,13 +145,6 @@ UserPurchasedProductService userPurchasedProductService = new UserPurchasedProdu
 Console.ForegroundColor = ConsoleColor.Green;
 Console.Write(randint);
 
-
-//userContext.InsertUserToMongoDb(user);
-//userService.DeleteUser(user);
-
-//Console.WriteLine(userContext.CollectionExistsAsync);
-
-bankService.InsertBank(bank);
 
 
 enum ENames
@@ -147,6 +167,28 @@ enum ELastNames
     Garcia,
     Jones ,
     Smith,
+};
+
+enum EColors 
+{ 
+    yellow,
+    orange,
+    green,
+    white,
+    blue,
+    black,
+    cyan,
+    magenta,
+    red
+};
+
+enum EComputerPerifery 
+{ 
+    keyboard,
+    headphones,
+    mouse,
+    monitor,
+    laptop
 };
 
 
