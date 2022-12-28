@@ -288,3 +288,17 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+.editorconfig
+
+Learning.Api/bin
+Learning.Api/obj
+
+Learning.Bll/bin
+Learning.Bll/obj
+
+Learning.Dal/bin
+Learning.Dal/obj
+
+Learning.Test/bin
+Learning.Test/obj
