@@ -10,12 +10,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Learning.Dal.Models
 {
-    public class MongoDBOrederList
-    { 
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public int IDPurchase { get; set; }
-        public DateTime DateOfOrder { get; set; }
-        public int TotalCost { get; set; }
+    [BsonIgnoreExtraElements]
+    public class UserAccount
+    {
+        public Guid BankAccountId { get; set; }
+        public int AmounOfMoney { get; set; }
+        public string BankName{ get; set; }
+        public bool IsLocked { get; set; }
+
     }
 }

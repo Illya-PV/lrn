@@ -11,13 +11,14 @@ using Learning.Dal.Intarfaces;
 
 namespace Learning.Bll.Implementation
 {
-    public class UserPurchasedProductServiceI:IUserPurchasedProductService
+    public class UserPurchasedProductService : IUserPurchasedProductService
     {
         private IUserPurchasedProductContext _uPP;
 
         public UserPurchasedProductService(IUserPurchasedProductContext userPurchasedProductContext) 
         { 
             _uPP = userPurchasedProductContext;
+            
         }
 
         /// <summary>
