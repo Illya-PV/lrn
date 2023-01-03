@@ -56,30 +56,35 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel DeleteProduct(ProductModel product) 
+        public ProductModel DeleteProduct(Guid productId) 
         {
-            _productContext.DeleteProductFromMongoDb(product);
-            return product;
+            return _productContext.DeleteProductFromMongoDb(productId);
+            
         }
         /// <summary>
         /// update product
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel UpdateProduct(ProductModel product) 
-        { 
-            _productContext.UpdateProductInMongoDb(product);
-            return product;
+        public ProductModel UpdateProduct(Guid productId,ProductModel product) 
+        {
+            return _productContext.UpdateProductInMongoDb(productId,product);
+            
         }
         /// <summary>
         /// update product
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel ReadProduct(ProductModel product) 
+        public ProductModel ReadProductById(Guid productId) 
         {
-            _productContext.ReadProductFromMongoDb(product);
-            return product;
+            return _productContext.GetProductById(productId);
+            
+        }
+        public List<ProductModel> GetAllProducts() 
+        {
+            return _productContext.GetAllList();
+            
         }
     }
 }

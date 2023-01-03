@@ -11,9 +11,12 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Learning.Dal.Models
 {
     [BsonIgnoreExtraElements]
-    public class BankModel
+    public class UserAccountModel
     {
         public Guid BankAccountId { get; set; }
         public int AmounOfMoney { get; set; }
+        public string BankName{ get; set; }
+        public bool IsLocked { get; set; }
+
     }
 }

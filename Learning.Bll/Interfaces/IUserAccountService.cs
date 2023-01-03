@@ -11,11 +11,11 @@ namespace Learning.Bll.Interfaces
     public interface IUserAccountService
     {
         InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount);
-        UserAccount UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankUser);
-        UserAccount DeleteBank(Guid userId);
-        UserAccount ReadBankById(Guid bankid);
-        UserAccount GetByName(string BankName);
-        List<UserAccount> GetAllBanks();
+        UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankUser);
+        UserAccountModel DeleteBank(Guid userId);
+        UserAccountModel ReadBankById(Guid bankid);
+        UserAccountModel GetByName(string BankName);
+        List<UserAccountModel> GetAllBanks();
 
 
     }

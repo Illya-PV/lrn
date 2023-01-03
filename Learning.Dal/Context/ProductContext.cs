@@ -15,7 +15,7 @@ namespace Learning.Dal.Context
 
         string connectionString = "mongodb+srv://illia_pv:localhost1617@cluster0.nvlushg.mongodb.net/test";
         string DBName = "EStore";
-        string ProdeuctCollectionName = "products";
+        string ProductCollectionName = "products";
 
         public ProductContext()
         {
@@ -28,48 +28,63 @@ namespace Learning.Dal.Context
         /// insert product to the DB
         /// </summary>
         /// <param name="product"></param>
-        public void InsertProductToMongoDb(ProductModel product)
+        public ProductModel InsertProductToMongoDb(ProductModel product)
         {
-            var collection = _db.GetCollection<ProductModel>(ProdeuctCollectionName);
+            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
             collection.InsertOne(product);
+            return product;
         }
         /// <summary>
         /// delete product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public void DeleteProductFromMongoDb(ProductModel product)
+        public ProductModel DeleteProductFromMongoDb(Guid productId)
         {
-            var collection = _db.GetCollection<ProductModel>(ProdeuctCollectionName);
-            var deleteFilter = Builders<ProductModel>.Filter.Eq("Price",120);
-            collection.DeleteOne(deleteFilter);
+            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
+            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
+            var bankDocument = collection.Find(filter).FirstOrDefault();
+            collection.DeleteOne(filter);
+            return bankDocument;
         }
-        public void DeleteCollection(ProductModel product)
+/*        public void DeleteCollection(ProductModel product)
         {
             var collection = _db.GetCollection<ProductModel>(ProdeuctCollectionName);
             _db.DropCollection(ProdeuctCollectionName);
-        }
+        }*/
         /// <summary>
         /// update product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public void UpdateProductInMongoDb(ProductModel product)
+        public ProductModel UpdateProductInMongoDb(Guid productId,ProductModel product)
         {
-            var collection = _db.GetCollection<ProductModel>(ProdeuctCollectionName);
-            var filter = Builders<ProductModel>.Filter.Eq("Price", 240);
-            var updateFilter = Builders<ProductModel>.Update.Set("Price", 120);
+            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
+            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
+            var updateFilter = Builders<ProductModel>.Update.Set("Price", product.Price).
+                Set("Count", product.Count).
+                Set("Name", product.Name).
+                Set("Type", product.Type).
+                Set("Color", product.Color);
             collection.UpdateOne(filter, updateFilter);
+            return GetProductById(productId);
         }
         /// <summary>
         /// read product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public void ReadProductFromMongoDb(ProductModel product)
+        public ProductModel GetProductById(Guid productId)
         {
-            var collection = _db.GetCollection<ProductModel>(ProdeuctCollectionName);
-            var filter = Builders<ProductModel>.Filter.Eq("Price", 120);
+            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
+            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
             var productDocument = collection.Find(filter).FirstOrDefault();
-            Console.WriteLine(productDocument.ToString());
+            return productDocument;
         }
+
+        public List<ProductModel> GetAllList()
+        {
+            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
+            return collection.Aggregate<ProductModel>().ToList();
+        }
+
 
 
 

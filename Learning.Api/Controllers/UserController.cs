@@ -24,24 +24,31 @@ namespace Learning.Api.Controllers
         }
         [Route("delete-user")]
         [HttpDelete]
-        public IActionResult DeleteUser([FromBody] UserModel user) 
+        public IActionResult DeleteUser(Guid userId) 
         { 
-            _userService.DeleteUser(user);
-            return new JsonResult(user);
+            var someUser = _userService.DeleteUser(userId);
+            return new JsonResult(someUser);
         }
         [Route("update-user")]
-        [HttpPut]
-        public IActionResult UpdateUser([FromBody] UserModel user) 
+        [HttpPatch]
+        public IActionResult UpdateUser(Guid userId, [FromBody] UserModel user) 
         { 
-            _userService.UpdateUser(user);
-            return new JsonResult(user);
+            var someUser = _userService.UpdateUser(userId,user);
+            return new JsonResult(someUser);
         }
-        [Route("read-user")]
+        [Route("read-user-by-id")]
         [HttpGet]
-        public IActionResult ReadUser([FromBody] UserModel user) 
+        public IActionResult ReadUserById(Guid userId) 
         {
-            _userService.ReadUser(user);
-            return new JsonResult(user);
+            var someUser = _userService.GetUserById(userId);
+            return new JsonResult(someUser);
+        }
+        [Route("get-all-users")]
+        [HttpGet]
+        public IActionResult GetAllUsers() 
+        {
+            var someUsers = _userService.GetAllUsers();
+            return new JsonResult(someUsers);
         }
     }
 }

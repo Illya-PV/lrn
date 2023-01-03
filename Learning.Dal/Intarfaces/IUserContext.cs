@@ -9,9 +9,10 @@ namespace Learning.Dal.Intarfaces
 {
     public interface IUserContext
     {
-        void InsertUserToMongoDb(UserModel user);
-        void DeleteUserFromMongoDb(UserModel user);
-        void UpdateUserInMongoDb(UserModel user);
-        void ReadUserFromMongoDb(UserModel user);
+        UserModel InsertUserToMongoDb(UserModel user);
+        UserModel DeleteUserFromMongoDb(Guid userId);
+        UserModel UpdateUserInMongoDb(Guid userID, UserModel user);
+        UserModel ReadUserById(Guid userId);
+        List<UserModel> GetAllList();
     }
 }

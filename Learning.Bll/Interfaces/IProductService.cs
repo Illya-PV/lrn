@@ -10,8 +10,9 @@ namespace Learning.Bll.Interfaces
     public interface IProductService
     {
         ProductModel InsertProduct(ProductModel product);
-        ProductModel DeleteProduct(ProductModel product);
-        ProductModel UpdateProduct(ProductModel product);
-        ProductModel ReadProduct(ProductModel product);
+        ProductModel DeleteProduct(Guid productId);
+        ProductModel UpdateProduct(Guid productId, ProductModel product);
+        ProductModel ReadProductById(Guid productId);
+        List<ProductModel> GetAllProducts();
     }
 }

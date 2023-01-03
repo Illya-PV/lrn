@@ -9,10 +9,11 @@ namespace Learning.Dal.Intarfaces
 {
     public interface IUserPurchasedProductContext
     {
-        void InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct);
-        void DeleteUPPFromMongoDb(UserPurchasedProductModel userPuechasedProduct);
-        void UpdateUPPInMongoDb(UserPurchasedProductModel userPuechasedProduct);
-        void ReadUPPFromMongoDB(UserPurchasedProductModel userPuechasedProduct);
+        UserPurchasedProductModel InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct);
+        UserPurchasedProductModel DeleteUPPFromMongoDb(Guid userId);
+        UserPurchasedProductModel UpdateUPPInMongoDb(Guid userId, UserPurchasedProductModel userPurchasedProduct);
+        UserPurchasedProductModel GetById(Guid userId);
+        List<UserPurchasedProductModel> GetAllList();
 
 
     }

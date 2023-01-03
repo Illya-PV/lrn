@@ -26,24 +26,31 @@ namespace Learning.Api.Controllers
         }
         [Route("delete-product")]
         [HttpDelete]
-        public IActionResult DeleteProduct([FromBody] ProductModel product)
+        public IActionResult DeleteProduct(Guid productId)
         {
-            _productService.DeleteProduct(product);
-            return new JsonResult(product);
+            var someProduct = _productService.DeleteProduct(productId);
+            return new JsonResult(someProduct);
         }
         [Route("update-product")]
-        [HttpPut]
-        public IActionResult UpdateProduct([FromBody] ProductModel product)
+        [HttpPatch]
+        public IActionResult UpdateProduct(Guid productId,[FromBody] ProductModel product)
         {
-            _productService.UpdateProduct(product);
-            return new JsonResult(product);
+            var someProduct = _productService.UpdateProduct(productId,product);
+            return new JsonResult(someProduct);
         }
         [Route("read-product")]
         [HttpGet]
-        public IActionResult ReadProduct([FromBody] ProductModel product)
+        public IActionResult ReadProductById(Guid productId)
         {
-            _productService.ReadProduct(product);
-            return new JsonResult(product);
+            var someProduct = _productService.ReadProductById(productId);
+            return new JsonResult(someProduct);
+        }
+        [Route("get-all-products")]
+        [HttpGet]
+        public IActionResult GetAllProducts() 
+        {
+            var someProduct = _productService.GetAllProducts();
+            return new JsonResult(someProduct);
         }
 
     }

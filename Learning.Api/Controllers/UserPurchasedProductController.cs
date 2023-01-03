@@ -17,31 +17,39 @@ namespace Learning.Api.Controllers
         }
         [Route("create-upp")]
         [HttpPost]
-        public IActionResult CreateUPP([FromBody] UserPurchasedProductModel userPurchasedProduct) 
-        { 
+        public IActionResult CreateUPP([FromBody] UserPurchasedProductModel userPurchasedProduct)
+        {
             _userPurchasedProductService.InsertUserPurchasedProduct(userPurchasedProduct);
             return new JsonResult(userPurchasedProduct);
         }
         [Route("delete-upp")]
         [HttpDelete]
-        public IActionResult DeleteUPP([FromBody] UserPurchasedProductModel userPurchasedProduct)
+        public IActionResult DeleteUPP(Guid userId)
         {
-            _userPurchasedProductService.DeleteUserPurchasedProduct(userPurchasedProduct);
-            return new JsonResult(userPurchasedProduct);
+            var someUsersProduct = _userPurchasedProductService.DeleteUserPurchasedProduct(userId);
+            return new JsonResult(someUsersProduct);
         }
         [Route("update-upp")]
-        [HttpPut]
-        public IActionResult UpdateUPP([FromBody] UserPurchasedProductModel userPurchasedProduct)
+        [HttpPatch]
+        public IActionResult UpdateUPP(Guid userId, [FromBody] UserPurchasedProductModel userPurchasedProduct)
         {
-            _userPurchasedProductService.UpdateUserPurchasedProduct(userPurchasedProduct);
-            return new JsonResult(userPurchasedProduct);
+            var someUsersProduct = _userPurchasedProductService.UpdateUserPurchasedProduct(userId, userPurchasedProduct);
+            return new JsonResult(someUsersProduct);
         }
-        [Route("create-upp")]
+        [Route("get-upp-by-id")]
         [HttpGet]
-        public IActionResult ReadUPP([FromBody] UserPurchasedProductModel userPurchasedProduct)
+        public IActionResult ReadUPP(Guid userId)
         {
-            _userPurchasedProductService.ReadUserPurchasedProduct(userPurchasedProduct);
-            return new JsonResult(userPurchasedProduct);
+            var someUsersProduct = _userPurchasedProductService.GetById(userId);
+            return new JsonResult(someUsersProduct);
+        }
+        [Route("get-all")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var someUsersProduct = _userPurchasedProductService.GetAllUserPurchasedProduct();
+            return new JsonResult(someUsersProduct);
+
         }
     }
 }

@@ -64,34 +64,34 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel DeleteUser(UserModel user)
+        public UserModel DeleteUser(Guid userId) 
         {
-            if (user.Email == "" || user.Email == " ")
-            {
-                Console.WriteLine("DB doesn`t has such model");
-            }
-            else { _userContext.DeleteUserFromMongoDb(user); }
-            return user;
+
+            return _userContext.DeleteUserFromMongoDb(userId); 
         }
         /// <summary>
         /// update validated user in mongoDB
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel UpdateUser(UserModel user) 
+        public UserModel UpdateUser(Guid userId,UserModel user) 
         {
-            _userContext.UpdateUserInMongoDb(user);
-            return user;
+            return _userContext.UpdateUserInMongoDb(userId,user);
+             
         }
         /// <summary>
         /// read user
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel ReadUser(UserModel user) 
+        public UserModel GetUserById(Guid userId) 
         {
-            _userContext.ReadUserFromMongoDb(user);
-            return user;
+            return _userContext.ReadUserById(userId);
+            
+        }
+        public List<UserModel> GetAllUsers() 
+        {
+            return _userContext.GetAllList();
         }
     }
 }

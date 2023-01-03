@@ -15,6 +15,6 @@ namespace Learning.Dal.Models
     { 
         public Guid UserId { get; set; }
         public int TotalPrice { get; set; }
-        public int ProductID { get; set; }
+        public Guid ProductID { get; set; }
     }
 }

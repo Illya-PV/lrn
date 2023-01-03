@@ -10,8 +10,9 @@ namespace Learning.Bll.Interfaces
     public interface IUserService
     {
         UserModel InsertUser(UserModel user);
-        UserModel DeleteUser(UserModel user);
-        UserModel UpdateUser(UserModel user);
-        UserModel ReadUser(UserModel user);
+        UserModel DeleteUser(Guid userId);
+        UserModel UpdateUser(Guid userId, UserModel user);
+        UserModel GetUserById(Guid userId);
+        List<UserModel> GetAllUsers();
     }
 }

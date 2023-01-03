@@ -11,11 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IBankContext, BankContext>();
+builder.Services.AddTransient<IUserAccountContext, UserAccountContext>();
 builder.Services.AddTransient<IUserContext, UserContext>();
 builder.Services.AddTransient<IProductContext, ProductContext>();
 builder.Services.AddTransient<IUserPurchasedProductContext, UserPurchasedProductContext>();
-builder.Services.AddTransient<IBankService, BankService>();
+builder.Services.AddTransient<IUserAccountService, UserAccountService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IUserPurchasedProductService, UserPurchasedProductService>();

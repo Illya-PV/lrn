@@ -45,7 +45,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccount DeleteBank(Guid userId) 
+        public UserAccountModel DeleteBank(Guid userId) 
         {
             return  _bankContext.DeleteBank(userId);
             
@@ -55,7 +55,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccount UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount) 
+        public UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount) 
         {
             return _bankContext.UpdateBank(bankid, newBankAccount);
              
@@ -65,15 +65,15 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccount ReadBankById(Guid bankid) 
+        public UserAccountModel ReadBankById(Guid bankid) 
         {
             return _bankContext.ReadBankById(bankid);           
         }
-        public UserAccount GetByName(string BankName) 
+        public UserAccountModel GetByName(string BankName) 
         { 
             return _bankContext.GetByName(BankName);
         }
-        public List<UserAccount> GetAllBanks() 
+        public List<UserAccountModel> GetAllBanks() 
         {
             return _bankContext.GetAllList();
         }

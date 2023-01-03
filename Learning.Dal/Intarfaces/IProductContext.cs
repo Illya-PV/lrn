@@ -9,10 +9,10 @@ namespace Learning.Dal.Intarfaces
 {
     public interface IProductContext
     {
-        void InsertProductToMongoDb(ProductModel product);
-        void DeleteProductFromMongoDb(ProductModel product);
-        void DeleteCollection(ProductModel product);
-        void UpdateProductInMongoDb(ProductModel product);
-        void ReadProductFromMongoDb(ProductModel product);
+        ProductModel InsertProductToMongoDb(ProductModel product);
+        ProductModel DeleteProductFromMongoDb(Guid productId);
+        ProductModel UpdateProductInMongoDb(Guid productId, ProductModel product);
+        ProductModel GetProductById(Guid productId);
+        List<ProductModel> GetAllList();
     }
 }

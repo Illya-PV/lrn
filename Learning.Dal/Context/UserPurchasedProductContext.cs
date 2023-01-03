@@ -26,42 +26,51 @@ namespace Learning.Dal.Context
         /// insert user`s purchased product to mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public void InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct)
+        public UserPurchasedProductModel InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct)
         {
             var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
             collection.InsertOne(userPuechasedProduct);
+            return userPuechasedProduct;
         }
         /// <summary>
         /// delete user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public void DeleteUPPFromMongoDb(UserPurchasedProductModel userPuechasedProduct)
+        public UserPurchasedProductModel DeleteUPPFromMongoDb(Guid userId)
         {
             var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var deleteFilter = Builders<UserPurchasedProductModel>.Filter.Eq("TotalPrice", 1200);
+            var deleteFilter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
+            var UserPurchasedProductDocument = collection.Find(deleteFilter).FirstOrDefault();
             collection.DeleteOne(deleteFilter);
+            return UserPurchasedProductDocument;
         }
         /// <summary>
         /// update user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public void UpdateUPPInMongoDb(UserPurchasedProductModel userPuechasedProduct)
+        public UserPurchasedProductModel UpdateUPPInMongoDb(Guid userId,UserPurchasedProductModel userPurchasedProduct)
         {
             var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("TotalPrice", 1000);
-            var updateFilter = Builders<UserPurchasedProductModel>.Update.Set("TotalPrice", 1200);
+            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
+            var updateFilter = Builders<UserPurchasedProductModel>.Update.Set("TotalPrice", userPurchasedProduct.TotalPrice);
             collection.UpdateOne(filter, updateFilter);
+            return GetById(userId);
         }
         /// <summary>
         /// read user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public void ReadUPPFromMongoDB(UserPurchasedProductModel userPuechasedProduct) 
+        public UserPurchasedProductModel GetById(Guid userId) 
         {
             var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("Email", "sbgmail.com");
-            var studentDocument = collection.Find(filter).FirstOrDefault();
-            Console.WriteLine(studentDocument.ToString());
+            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
+            var UserPurchasedProductDocument = collection.Find(filter).FirstOrDefault();
+            return UserPurchasedProductDocument;
+        }
+        public List<UserPurchasedProductModel> GetAllList() 
+        {
+            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
+            return collection.Aggregate<UserPurchasedProductModel>().ToList();
         }
     }
 }

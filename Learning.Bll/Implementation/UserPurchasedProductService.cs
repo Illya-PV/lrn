@@ -41,30 +41,32 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel DeleteUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
+        public UserPurchasedProductModel DeleteUserPurchasedProduct(Guid userId)
         {
-            _uPP.DeleteUPPFromMongoDb(UserPurchasedProduct);
-            return UserPurchasedProduct;
+            return _uPP.DeleteUPPFromMongoDb(userId);
+             
         }
         /// <summary>
         /// update UserPurchasedProduct
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel UpdateUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
+        public UserPurchasedProductModel UpdateUserPurchasedProduct(Guid userId,UserPurchasedProductModel UserPurchasedProduct)
         {
-            _uPP.UpdateUPPInMongoDb(UserPurchasedProduct);
-            return UserPurchasedProduct;
+            return _uPP.UpdateUPPInMongoDb(userId,UserPurchasedProduct);  
         }
         /// <summary>
         /// read UserPurchasedProduct
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel ReadUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
+        public UserPurchasedProductModel GetById(Guid userId)
         {
-            _uPP.ReadUPPFromMongoDB(UserPurchasedProduct);
-            return UserPurchasedProduct;
+            return _uPP.GetById(userId);  
+        }
+        public List<UserPurchasedProductModel> GetAllUserPurchasedProduct() 
+        {
+            return _uPP.GetAllList();
         }
     }
 }

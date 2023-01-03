@@ -10,10 +10,10 @@ namespace Learning.Dal.Intarfaces
     public interface IUserAccountContext
     {
         InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount);
-        UserAccount DeleteBank(Guid bankId);
-        UserAccount UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount);
-        UserAccount ReadBankById(Guid bankid);
-        UserAccount GetByName(string BankName);
-        List<UserAccount> GetAllList();
+        UserAccountModel DeleteBank(Guid bankId);
+        UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount);
+        UserAccountModel ReadBankById(Guid bankid);
+        UserAccountModel GetByName(string BankName);
+        List<UserAccountModel> GetAllList();
     }
 }
