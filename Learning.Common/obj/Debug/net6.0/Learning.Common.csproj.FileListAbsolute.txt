@@ -1,0 +1,12 @@
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\bin\Debug\net6.0\Learning.Common.deps.json
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\bin\Debug\net6.0\Learning.Common.dll
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\bin\Debug\net6.0\Learning.Common.pdb
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.csproj.AssemblyReference.cache
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.AssemblyInfoInputs.cache
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.AssemblyInfo.cs
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.csproj.CoreCompileInputs.cache
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.dll
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\refint\Learning.Common.dll
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\Learning.Common.pdb
+C:\Users\illia.pavlov\Desktop\Lrn.project\lrn\Learning.Common\obj\Debug\net6.0\ref\Learning.Common.dll

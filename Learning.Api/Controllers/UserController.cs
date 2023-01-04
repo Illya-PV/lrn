@@ -1,4 +1,6 @@
 ﻿using Learning.Bll.Interfaces;
+using Learning.Common.Models.InsertModels;
+using Learning.Dal.InsertModels;
 using Learning.Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,7 @@ namespace Learning.Api.Controllers
         }
         [Route("create-user")]
         [HttpPost]
-        public IActionResult CreateUser([FromBody] UserModel user) 
+        public IActionResult CreateUser([FromBody] UserInsertModel user) 
         { 
             _userService.InsertUser(user);
             return new JsonResult(user);
@@ -31,7 +33,7 @@ namespace Learning.Api.Controllers
         }
         [Route("update-user")]
         [HttpPatch]
-        public IActionResult UpdateUser(Guid userId, [FromBody] UserModel user) 
+        public IActionResult UpdateUser(Guid userId, [FromBody] UserEntity user) 
         { 
             var someUser = _userService.UpdateUser(userId,user);
             return new JsonResult(someUser);

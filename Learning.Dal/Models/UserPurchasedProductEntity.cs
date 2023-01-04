@@ -11,10 +11,10 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Learning.Dal.Models
 {
     [BsonIgnoreExtraElements]
-    public class UserPurchasedProductModel
+    public class UserPurchasedProductEntity
     { 
         public Guid UserId { get; set; }
         public int TotalPrice { get; set; }
-        public Guid ProductID { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

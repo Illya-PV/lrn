@@ -1,4 +1,6 @@
-﻿using Learning.Dal.Models;
+﻿using Learning.Common.Models.PatchModels;
+using Learning.Dal.InsertModels;
+using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +12,12 @@ namespace Learning.Bll.Interfaces
 {
     public interface IUserAccountService
     {
-        InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount);
-        UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankUser);
-        UserAccountModel DeleteBank(Guid userId);
-        UserAccountModel ReadBankById(Guid bankid);
-        UserAccountModel GetByName(string BankName);
-        List<UserAccountModel> GetAllBanks();
+        void InsertBank(UserAccountInsertModel newBankAccount);
+        UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount);
+        UserAccountEntity DeleteBank(Guid userId);
+        UserAccountEntity ReadBankById(Guid bankid);
+        UserAccountEntity GetByName(string BankName);
+        List<UserAccountEntity> GetAllBanks();
 
 
     }

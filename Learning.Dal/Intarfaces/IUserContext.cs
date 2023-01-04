@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Intarfaces
 {
     public interface IUserContext
     {
-        UserModel InsertUserToMongoDb(UserModel user);
-        UserModel DeleteUserFromMongoDb(Guid userId);
-        UserModel UpdateUserInMongoDb(Guid userID, UserModel user);
-        UserModel ReadUserById(Guid userId);
-        List<UserModel> GetAllList();
+        void InsertUserToMongoDb(UserInsertModel user);
+        UserEntity DeleteUserFromMongoDb(Guid userId);
+        UserEntity UpdateUserInMongoDb(Guid userID, UserEntity user);
+        UserEntity ReadUserById(Guid userId);
+        List<UserEntity> GetAllList();
     }
 }

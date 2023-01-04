@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -25,9 +26,10 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel InsertProduct(ProductModel product) 
+        public void InsertProduct(ProductInsertModel product) 
         {
-            product.ProductId = Guid.NewGuid();
+            
+            
             if (product.Price <= 0)
             {
                 product.Price *= 0;
@@ -49,14 +51,14 @@ namespace Learning.Bll.Implementation
                 _productContext.InsertProductToMongoDb(product);
                 Console.WriteLine($"product:{product} added successfully\n");
             }
-            return product;
+            
         }
         /// <summary>
         /// delete product
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel DeleteProduct(Guid productId) 
+        public ProductEntity DeleteProduct(Guid productId) 
         {
             return _productContext.DeleteProductFromMongoDb(productId);
             
@@ -66,7 +68,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel UpdateProduct(Guid productId,ProductModel product) 
+        public ProductEntity UpdateProduct(Guid productId,ProductEntity product) 
         {
             return _productContext.UpdateProductInMongoDb(productId,product);
             
@@ -76,12 +78,12 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductModel ReadProductById(Guid productId) 
+        public ProductEntity ReadProductById(Guid productId) 
         {
             return _productContext.GetProductById(productId);
             
         }
-        public List<ProductModel> GetAllProducts() 
+        public List<ProductEntity> GetAllProducts() 
         {
             return _productContext.GetAllList();
             

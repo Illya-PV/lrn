@@ -7,6 +7,8 @@ using MongoDB.Driver;
 using Learning.Dal.Models;
 using MongoDB.Bson;
 using Learning.Dal.Intarfaces;
+using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Context
 {
@@ -28,20 +30,29 @@ namespace Learning.Dal.Context
         /// insert user to mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public UserModel InsertUserToMongoDb(UserModel user)
-        {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName); 
+        public void InsertUserToMongoDb(UserInsertModel insertUser)
+        {              
+            var collection = _db.GetCollection<UserEntity>(UserCollectionName);
+            var user = new UserEntity()
+            {
+                UserId = Guid.NewGuid(),
+                BankAccountId = Guid.NewGuid(),
+                FirstName = insertUser.FirstName,
+                LastName = insertUser.LastName,
+                Email = insertUser.Email,
+                Password = insertUser.Password
+            };
             collection.InsertOne(user);
-            return user;
+            
         }
         /// <summary>
         /// delete user from mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public UserModel DeleteUserFromMongoDb(Guid userId) 
+        public UserEntity DeleteUserFromMongoDb(Guid userId) 
         {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName);
-            var deleteFilter = Builders<UserModel>.Filter.Eq("UserId",userId);
+            var collection = _db.GetCollection<UserEntity>(UserCollectionName);
+            var deleteFilter = Builders<UserEntity>.Filter.Eq("UserId",userId);
             var userDocument = collection.Find(deleteFilter).FirstOrDefault();
             collection.DeleteOne(deleteFilter);
             return userDocument;
@@ -51,25 +62,25 @@ namespace Learning.Dal.Context
         /// update user in mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public UserModel UpdateUserInMongoDb(Guid userID,UserModel user) 
+        public UserEntity UpdateUserInMongoDb(Guid userId, UserEntity user) 
         {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName);
-            var filter = Builders<UserModel>.Filter.Eq("UserId", userID);
-            var updateFilter = Builders<UserModel>.Update.Set("FirstName", user.FirstName).
+            var collection = _db.GetCollection<UserEntity>(UserCollectionName);
+            var filter = Builders<UserEntity>.Filter.Eq("UserId", userId);
+            var updateFilter = Builders<UserEntity>.Update.Set("FirstName", user.FirstName).
                 Set("LastName", user.LastName).
                 Set("Email", user.Email).
                 Set("Password", user.Password);
             collection.UpdateOne(filter,updateFilter);
-            return ReadUserById(userID);
+            return ReadUserById(userId);
         }
         /// <summary>
         /// read user from mongoDb
         /// </summary>
         /// <param name="user"></param>
-        public UserModel ReadUserById(Guid userId)
+        public UserEntity ReadUserById(Guid userId)
         {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName);
-            var filter = Builders<UserModel>.Filter.Eq("UserId", userId);
+            var collection = _db.GetCollection<UserEntity>(UserCollectionName);
+            var filter = Builders<UserEntity>.Filter.Eq("UserId", userId);
             var studentDocument = collection.Find(filter).FirstOrDefault();
             return studentDocument;
         }
@@ -80,10 +91,10 @@ namespace Learning.Dal.Context
             var studentDocument = collection.Find(filter).FirstOrDefault();
             return studentDocument;
         }*/
-        public List<UserModel> GetAllList() 
+        public List<UserEntity> GetAllList() 
         {
-            var collection = _db.GetCollection<UserModel>(UserCollectionName);
-            return collection.Aggregate<UserModel>().ToList();
+            var collection = _db.GetCollection<UserEntity>(UserCollectionName);
+            return collection.Aggregate<UserEntity>().ToList();
         }
     }
 }

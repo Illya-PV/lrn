@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Dal.InsertModels;
 
 namespace Learning.Dal.Intarfaces
 {
     public interface IUserAccountContext
     {
-        InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount);
-        UserAccountModel DeleteBank(Guid bankId);
-        UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount);
-        UserAccountModel ReadBankById(Guid bankid);
-        UserAccountModel GetByName(string BankName);
-        List<UserAccountModel> GetAllList();
+        void InsertBank(UserAccountInsertModel newBankAccount);
+        UserAccountEntity DeleteBank(Guid bankId);
+        UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount);
+        UserAccountEntity ReadBankById(Guid bankid);
+        UserAccountEntity GetByName(string BankName);
+        List<UserAccountEntity> GetAllList();
     }
 }

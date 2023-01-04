@@ -1,4 +1,5 @@
-﻿using Learning.Dal.Models;
+﻿using Learning.Common.Models.InsertModels;
+using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Learning.Dal.Intarfaces
 {
     public interface IUserPurchasedProductContext
     {
-        UserPurchasedProductModel InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct);
-        UserPurchasedProductModel DeleteUPPFromMongoDb(Guid userId);
-        UserPurchasedProductModel UpdateUPPInMongoDb(Guid userId, UserPurchasedProductModel userPurchasedProduct);
-        UserPurchasedProductModel GetById(Guid userId);
-        List<UserPurchasedProductModel> GetAllList();
+        void InsertUPPToMongoDb(UserPurchasedProductInsertModel intsertUserPuechasedProduct);
+        UserPurchasedProductEntity DeleteUPPFromMongoDb(Guid userId);
+        UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId, UserPurchasedProductEntity userPurchasedProduct);
+        UserPurchasedProductEntity GetById(Guid userId);
+        List<UserPurchasedProductEntity> GetAllList();
 
 
     }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Common.Models.InsertModels;
 
 
 namespace Learning.Bll.Implementation
@@ -26,9 +27,9 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel InsertUser(UserModel user) 
+        public void InsertUser(UserInsertModel user) 
         { 
-            user.UserId = Guid.NewGuid();
+            
             if (user.FirstName == " " | user.LastName == " ")
             {
                 Console.WriteLine("user name can`t be empty\n");
@@ -57,14 +58,14 @@ namespace Learning.Bll.Implementation
                 Console.WriteLine($"user:{user} added successfully\n");
                 _userContext.InsertUserToMongoDb(user);                              
             } 
-            return user;
+         
         }
         /// <summary>
         /// delete validated user from mongoDB
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel DeleteUser(Guid userId) 
+        public UserEntity DeleteUser(Guid userId) 
         {
 
             return _userContext.DeleteUserFromMongoDb(userId); 
@@ -74,7 +75,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel UpdateUser(Guid userId,UserModel user) 
+        public UserEntity UpdateUser(Guid userId,UserEntity user) 
         {
             return _userContext.UpdateUserInMongoDb(userId,user);
              
@@ -84,12 +85,12 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserModel GetUserById(Guid userId) 
+        public UserEntity GetUserById(Guid userId) 
         {
             return _userContext.ReadUserById(userId);
             
         }
-        public List<UserModel> GetAllUsers() 
+        public List<UserEntity> GetAllUsers() 
         {
             return _userContext.GetAllList();
         }

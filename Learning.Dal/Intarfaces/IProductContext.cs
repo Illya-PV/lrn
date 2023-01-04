@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Dal.Intarfaces
 {
     public interface IProductContext
     {
-        ProductModel InsertProductToMongoDb(ProductModel product);
-        ProductModel DeleteProductFromMongoDb(Guid productId);
-        ProductModel UpdateProductInMongoDb(Guid productId, ProductModel product);
-        ProductModel GetProductById(Guid productId);
-        List<ProductModel> GetAllList();
+        void InsertProductToMongoDb(ProductInsertModel product);
+        ProductEntity DeleteProductFromMongoDb(Guid productId);
+        ProductEntity UpdateProductInMongoDb(Guid productId, ProductEntity product);
+        ProductEntity GetProductById(Guid productId);
+        List<ProductEntity> GetAllList();
     }
 }

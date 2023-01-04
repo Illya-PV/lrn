@@ -14,4 +14,8 @@
     <PackageReference Include="MongoDB.Libmongocrypt" Version="1.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Learning.Common\Learning.Common.csproj" />
+  </ItemGroup>
+
 </Project>

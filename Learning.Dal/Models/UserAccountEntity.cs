@@ -11,21 +11,12 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Learning.Dal.Models
 {
     [BsonIgnoreExtraElements]
-    public class UserModel
-    { 
-        public Guid UserId { get; set; }        
+    public class UserAccountEntity
+    {
         public Guid BankAccountId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Fullname => $"{FirstName} {LastName}";
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public int AmounOfMoney { get; set; }
+        public string BankName{ get; set; }
+        public bool IsLocked { get; set; }
+
     }
 }
-
-
-
-
-   
-        
-

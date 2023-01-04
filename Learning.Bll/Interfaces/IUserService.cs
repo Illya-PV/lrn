@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Bll.Interfaces
 {
     public interface IUserService
     {
-        UserModel InsertUser(UserModel user);
-        UserModel DeleteUser(Guid userId);
-        UserModel UpdateUser(Guid userId, UserModel user);
-        UserModel GetUserById(Guid userId);
-        List<UserModel> GetAllUsers();
+        void InsertUser(UserInsertModel user);
+        UserEntity DeleteUser(Guid userId);
+        UserEntity UpdateUser(Guid userId, UserEntity user);
+        UserEntity GetUserById(Guid userId);
+        List<UserEntity> GetAllUsers();
     }
 }

@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Dal.Models;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Bll.Interfaces
 {
     public interface IProductService
     {
-        ProductModel InsertProduct(ProductModel product);
-        ProductModel DeleteProduct(Guid productId);
-        ProductModel UpdateProduct(Guid productId, ProductModel product);
-        ProductModel ReadProductById(Guid productId);
-        List<ProductModel> GetAllProducts();
+        void InsertProduct(ProductInsertModel product);
+        ProductEntity DeleteProduct(Guid productId);
+        ProductEntity UpdateProduct(Guid productId, ProductEntity product);
+        ProductEntity ReadProductById(Guid productId);
+        List<ProductEntity> GetAllProducts();
     }
 }

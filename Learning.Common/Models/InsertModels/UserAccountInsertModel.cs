@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Learning.Dal.InsertModels
 {
-    internal class UserAccountInsertModel
+    public class UserAccountInsertModel
     {
         public int AmountOfMoney { get; set; }
         public string BankName { get; set; }

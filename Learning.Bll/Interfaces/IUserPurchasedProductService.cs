@@ -1,4 +1,5 @@
-﻿using Learning.Dal.Models;
+﻿using Learning.Common.Models.InsertModels;
+using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Learning.Bll.Interfaces
 {
     public interface IUserPurchasedProductService
     {
-        UserPurchasedProductModel InsertUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct);
-        UserPurchasedProductModel DeleteUserPurchasedProduct(Guid userId);
-        UserPurchasedProductModel UpdateUserPurchasedProduct(Guid userId, UserPurchasedProductModel UserPurchasedProduct);
-        UserPurchasedProductModel GetById(Guid userId);
-        List<UserPurchasedProductModel> GetAllUserPurchasedProduct();
+        void InsertUserPurchasedProduct(UserPurchasedProductInsertModel UserPurchasedProduct);
+        UserPurchasedProductEntity DeleteUserPurchasedProduct(Guid userId);
+        UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId, UserPurchasedProductEntity UserPurchasedProduct);
+        UserPurchasedProductEntity GetById(Guid userId);
+        List<UserPurchasedProductEntity> GetAllUserPurchasedProduct();
     }
 }

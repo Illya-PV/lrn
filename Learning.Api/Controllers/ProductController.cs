@@ -1,4 +1,5 @@
 ﻿using Learning.Bll.Interfaces;
+using Learning.Common.Models.InsertModels;
 using Learning.Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace Learning.Api.Controllers
         }
         [Route("create-product")]
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] ProductModel product) 
+        public IActionResult CreateProduct([FromBody] ProductInsertModel product) 
         {
             _productService.InsertProduct(product);
             return new JsonResult(product);
@@ -33,7 +34,7 @@ namespace Learning.Api.Controllers
         }
         [Route("update-product")]
         [HttpPatch]
-        public IActionResult UpdateProduct(Guid productId,[FromBody] ProductModel product)
+        public IActionResult UpdateProduct(Guid productId,[FromBody] ProductEntity product)
         {
             var someProduct = _productService.UpdateProduct(productId,product);
             return new JsonResult(someProduct);

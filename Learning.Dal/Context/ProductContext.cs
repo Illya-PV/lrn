@@ -7,6 +7,8 @@ using MongoDB.Driver;
 using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
 
+using Learning.Common.Models.InsertModels;
+
 namespace Learning.Dal.Context
 {
     public class ProductContext:IProductContext
@@ -28,20 +30,28 @@ namespace Learning.Dal.Context
         /// insert product to the DB
         /// </summary>
         /// <param name="product"></param>
-        public ProductModel InsertProductToMongoDb(ProductModel product)
+        public void InsertProductToMongoDb(ProductInsertModel insertProduct)
         {
-            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
+            var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
+            var product = new ProductEntity() 
+            {
+                ProductId = Guid.NewGuid(),
+                Color = insertProduct.Color,
+                Name = insertProduct.Name,
+                Price = insertProduct.Price,
+                Count = insertProduct.Count,
+                Type = insertProduct.Type
+            };
             collection.InsertOne(product);
-            return product;
         }
         /// <summary>
         /// delete product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public ProductModel DeleteProductFromMongoDb(Guid productId)
+        public ProductEntity DeleteProductFromMongoDb(Guid productId)
         {
-            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
-            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
+            var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
+            var filter = Builders<ProductEntity>.Filter.Eq("ProductId", productId);
             var bankDocument = collection.Find(filter).FirstOrDefault();
             collection.DeleteOne(filter);
             return bankDocument;
@@ -55,11 +65,11 @@ namespace Learning.Dal.Context
         /// update product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public ProductModel UpdateProductInMongoDb(Guid productId,ProductModel product)
+        public ProductEntity UpdateProductInMongoDb(Guid productId,ProductEntity product)
         {
-            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
-            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
-            var updateFilter = Builders<ProductModel>.Update.Set("Price", product.Price).
+            var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
+            var filter = Builders<ProductEntity>.Filter.Eq("ProductId", productId);
+            var updateFilter = Builders<ProductEntity>.Update.Set("Price", product.Price).
                 Set("Count", product.Count).
                 Set("Name", product.Name).
                 Set("Type", product.Type).
@@ -71,18 +81,18 @@ namespace Learning.Dal.Context
         /// read product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public ProductModel GetProductById(Guid productId)
+        public ProductEntity GetProductById(Guid productId)
         {
-            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
-            var filter = Builders<ProductModel>.Filter.Eq("ProductId", productId);
+            var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
+            var filter = Builders<ProductEntity>.Filter.Eq("ProductId", productId);
             var productDocument = collection.Find(filter).FirstOrDefault();
             return productDocument;
         }
 
-        public List<ProductModel> GetAllList()
+        public List<ProductEntity> GetAllList()
         {
-            var collection = _db.GetCollection<ProductModel>(ProductCollectionName);
-            return collection.Aggregate<ProductModel>().ToList();
+            var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
+            return collection.Aggregate<ProductEntity>().ToList();
         }
 
 

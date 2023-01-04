@@ -8,6 +8,9 @@ using Learning.Dal.Models;
 using Learning.Dal.Context;
 using Learning.Bll.Interfaces;
 using Learning.Dal.Intarfaces;
+using Learning.Common.Models.InsertModels;
+using Learning.Dal.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -26,7 +29,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount) 
+        public void InsertBank(UserAccountInsertModel newBankAccount) 
         {
             if (newBankAccount.AmountOfMoney <= 0)
             {
@@ -38,14 +41,14 @@ namespace Learning.Bll.Implementation
                 _bankContext.InsertBank(newBankAccount);
                 Console.WriteLine($"bank:{newBankAccount} added successfully\n");
             }
-            return newBankAccount;
+            
         }
         /// <summary>
         /// delete bank
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccountModel DeleteBank(Guid userId) 
+        public UserAccountEntity DeleteBank(Guid userId) 
         {
             return  _bankContext.DeleteBank(userId);
             
@@ -55,7 +58,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount) 
+        public UserPatchModel UpdateBank(Guid bankid, UserAccountEntity newBankAccount) 
         {
             return _bankContext.UpdateBank(bankid, newBankAccount);
              
@@ -65,15 +68,15 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserAccountModel ReadBankById(Guid bankid) 
+        public UserAccountEntity ReadBankById(Guid bankid) 
         {
             return _bankContext.ReadBankById(bankid);           
         }
-        public UserAccountModel GetByName(string BankName) 
+        public UserAccountEntity GetByName(string BankName) 
         { 
             return _bankContext.GetByName(BankName);
         }
-        public List<UserAccountModel> GetAllBanks() 
+        public List<UserAccountEntity> GetAllBanks() 
         {
             return _bankContext.GetAllList();
         }

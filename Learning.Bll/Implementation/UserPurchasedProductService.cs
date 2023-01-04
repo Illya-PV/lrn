@@ -8,6 +8,7 @@ using Learning.Dal.Models;
 using Learning.Dal.Context;
 using Learning.Bll.Interfaces;
 using Learning.Dal.Intarfaces;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -26,22 +27,22 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel InsertUserPurchasedProduct(UserPurchasedProductModel UserPurchasedProduct)
+        public void InsertUserPurchasedProduct(UserPurchasedProductInsertModel UserPurchasedProduct)
         {
-            UserPurchasedProduct.UserId = Guid.NewGuid();
+            
             if (UserPurchasedProduct.TotalPrice <= 0)
             {
                 UserPurchasedProduct.TotalPrice = 0;
             }
             else { _uPP.InsertUPPToMongoDb(UserPurchasedProduct);}
-            return UserPurchasedProduct;
+           
         }
         /// <summary>
         /// delete UserPurchasedProduct
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel DeleteUserPurchasedProduct(Guid userId)
+        public UserPurchasedProductEntity DeleteUserPurchasedProduct(Guid userId)
         {
             return _uPP.DeleteUPPFromMongoDb(userId);
              
@@ -51,7 +52,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel UpdateUserPurchasedProduct(Guid userId,UserPurchasedProductModel UserPurchasedProduct)
+        public UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId,UserPurchasedProductEntity UserPurchasedProduct)
         {
             return _uPP.UpdateUPPInMongoDb(userId,UserPurchasedProduct);  
         }
@@ -60,11 +61,11 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductModel GetById(Guid userId)
+        public UserPurchasedProductEntity GetById(Guid userId)
         {
             return _uPP.GetById(userId);  
         }
-        public List<UserPurchasedProductModel> GetAllUserPurchasedProduct() 
+        public List<UserPurchasedProductEntity> GetAllUserPurchasedProduct() 
         {
             return _uPP.GetAllList();
         }

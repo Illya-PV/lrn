@@ -1,4 +1,5 @@
 ﻿using Learning.Bll.Interfaces;
+using Learning.Common.Models.InsertModels;
 using Learning.Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Learning.Api.Controllers
         }
         [Route("create-upp")]
         [HttpPost]
-        public IActionResult CreateUPP([FromBody] UserPurchasedProductModel userPurchasedProduct)
+        public IActionResult CreateUPP([FromBody] UserPurchasedProductInsertModel userPurchasedProduct)
         {
             _userPurchasedProductService.InsertUserPurchasedProduct(userPurchasedProduct);
             return new JsonResult(userPurchasedProduct);
@@ -31,7 +32,7 @@ namespace Learning.Api.Controllers
         }
         [Route("update-upp")]
         [HttpPatch]
-        public IActionResult UpdateUPP(Guid userId, [FromBody] UserPurchasedProductModel userPurchasedProduct)
+        public IActionResult UpdateUPP(Guid userId, [FromBody] UserPurchasedProductEntity userPurchasedProduct)
         {
             var someUsersProduct = _userPurchasedProductService.UpdateUserPurchasedProduct(userId, userPurchasedProduct);
             return new JsonResult(someUsersProduct);

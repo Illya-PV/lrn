@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
+using Learning.Common.Models.InsertModels;
 
 namespace Learning.Dal.Context
 {
@@ -26,20 +27,26 @@ namespace Learning.Dal.Context
         /// insert user`s purchased product to mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public UserPurchasedProductModel InsertUPPToMongoDb(UserPurchasedProductModel userPuechasedProduct)
+        public void InsertUPPToMongoDb(UserPurchasedProductInsertModel intsertUserPuechasedProduct)
         {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
+            var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
+            var userPuechasedProduct = new UserPurchasedProductEntity() 
+            { 
+                UserId = Guid.NewGuid(),
+                ProductId = Guid.NewGuid(),
+                TotalPrice = intsertUserPuechasedProduct.TotalPrice
+            };
             collection.InsertOne(userPuechasedProduct);
-            return userPuechasedProduct;
+            
         }
         /// <summary>
         /// delete user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public UserPurchasedProductModel DeleteUPPFromMongoDb(Guid userId)
+        public UserPurchasedProductEntity DeleteUPPFromMongoDb(Guid userId)
         {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var deleteFilter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
+            var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
+            var deleteFilter = Builders<UserPurchasedProductEntity>.Filter.Eq("UserId", userId);
             var UserPurchasedProductDocument = collection.Find(deleteFilter).FirstOrDefault();
             collection.DeleteOne(deleteFilter);
             return UserPurchasedProductDocument;
@@ -48,11 +55,11 @@ namespace Learning.Dal.Context
         /// update user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public UserPurchasedProductModel UpdateUPPInMongoDb(Guid userId,UserPurchasedProductModel userPurchasedProduct)
+        public UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId,UserPurchasedProductEntity userPurchasedProduct)
         {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
-            var updateFilter = Builders<UserPurchasedProductModel>.Update.Set("TotalPrice", userPurchasedProduct.TotalPrice);
+            var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
+            var filter = Builders<UserPurchasedProductEntity>.Filter.Eq("UserId", userId);
+            var updateFilter = Builders<UserPurchasedProductEntity>.Update.Set("TotalPrice", userPurchasedProduct.TotalPrice);
             collection.UpdateOne(filter, updateFilter);
             return GetById(userId);
         }
@@ -60,17 +67,17 @@ namespace Learning.Dal.Context
         /// read user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public UserPurchasedProductModel GetById(Guid userId) 
+        public UserPurchasedProductEntity GetById(Guid userId) 
         {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            var filter = Builders<UserPurchasedProductModel>.Filter.Eq("UserId", userId);
+            var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
+            var filter = Builders<UserPurchasedProductEntity>.Filter.Eq("UserId", userId);
             var UserPurchasedProductDocument = collection.Find(filter).FirstOrDefault();
             return UserPurchasedProductDocument;
         }
-        public List<UserPurchasedProductModel> GetAllList() 
+        public List<UserPurchasedProductEntity> GetAllList() 
         {
-            var collection = _db.GetCollection<UserPurchasedProductModel>(UserPurchasedProductCollectionName);
-            return collection.Aggregate<UserPurchasedProductModel>().ToList();
+            var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
+            return collection.Aggregate<UserPurchasedProductEntity>().ToList();
         }
     }
 }

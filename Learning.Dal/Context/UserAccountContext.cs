@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
+using Learning.Dal.InsertModels;
 
 namespace Learning.Dal.Context
 {
@@ -28,22 +29,27 @@ namespace Learning.Dal.Context
         /// insert bank to mongoDb
         /// </summary>
         /// <param name="bank"></param>
-        public InsertAndUpdateModelForBank InsertBank(InsertAndUpdateModelForBank newBankAccount)
-        {
-            Guid bankId = Guid.NewGuid();   
-            var collection = _db.GetCollection<InsertAndUpdateModelForBank>(BankCollectionName);
-            collection.InsertOne(newBankAccount);
-            return newBankAccount;
-            
+        public void InsertBank(UserAccountInsertModel newBankAccount)
+        {         
+            var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            var userAccount = new UserAccountEntity()
+            { 
+              BankAccountId = Guid.NewGuid(),
+              BankName = newBankAccount.BankName,
+              IsLocked = false,
+              AmounOfMoney = newBankAccount.AmountOfMoney   
+            }; 
+            collection.InsertOne(userAccount);
+
         }
         /// <summary>
         /// delete bank to mongoDb
         /// </summary>
         /// <param name="bank"></param>
-        public UserAccountModel DeleteBank(Guid bankId)
+        public UserAccountEntity DeleteBank(Guid bankId)
         {
-            var collection = _db.GetCollection<UserAccountModel>(BankCollectionName);
-            var deleteFilter = Builders<UserAccountModel>.Filter.Eq("BankAccountId", bankId);
+            var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            var deleteFilter = Builders<UserAccountEntity>.Filter.Eq("BankAccountId", bankId);
             var bankDocument = collection.Find(deleteFilter).FirstOrDefault();
             collection.DeleteOne(deleteFilter);
             return bankDocument;
@@ -53,11 +59,11 @@ namespace Learning.Dal.Context
         /// update bank by id, and change amount of money
         /// </summary>
         /// <param name="bank"></param>
-        public UserAccountModel UpdateBank(Guid bankid, InsertAndUpdateModelForBank newBankAccount)
+        public UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount)
         {
-            var collection = _db.GetCollection<UserAccountModel>(BankCollectionName);
-            var filter = Builders<UserAccountModel>.Filter.Eq("BankAccountId", bankid);
-            var updateFilter = Builders<UserAccountModel>.Update.Set("AmountOfMoney", newBankAccount.AmountOfMoney).
+            var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            var filter = Builders<UserAccountEntity>.Filter.Eq("BankAccountId", bankid);
+            var updateFilter = Builders<UserAccountEntity>.Update.Set("AmountOfMoney", newBankAccount.AmounOfMoney).
                 Set("IsLocked", newBankAccount.IsLocked).
                 Set("BankName", newBankAccount.BankName);
             collection.UpdateOne(filter, updateFilter);
@@ -67,17 +73,17 @@ namespace Learning.Dal.Context
         /// read bank to mongoDb
         /// </summary>
         /// <param name="bank"></param>
-        public UserAccountModel ReadBankById(Guid bankid) 
+        public UserAccountEntity ReadBankById(Guid bankid) 
         {
-            var collection = _db.GetCollection<UserAccountModel>(BankCollectionName);
-            var filter = Builders<UserAccountModel>.Filter.Eq("BankAccountId", bankid);
+            var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            var filter = Builders<UserAccountEntity>.Filter.Eq("BankAccountId", bankid);
             var bankDocument = collection.Find(filter).FirstOrDefault();
             return bankDocument;
         }
-        public UserAccountModel GetByName(string BankName) 
+        public UserAccountEntity GetByName(string BankName) 
         {
-            var collenction = _db.GetCollection<UserAccountModel>(BankCollectionName);
-            var filter = Builders<UserAccountModel>.Filter.Eq("BankName", BankName);
+            var collenction = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            var filter = Builders<UserAccountEntity>.Filter.Eq("BankName", BankName);
             var bankDocument = collenction.Find(filter).FirstOrDefault();
             return bankDocument;
         }
@@ -85,10 +91,10 @@ namespace Learning.Dal.Context
         /// get all users
         /// </summary>
         /// <returns></returns>
-        public List<UserAccountModel> GetAllList() 
+        public List<UserAccountEntity> GetAllList() 
         {
-            var collection = _db.GetCollection<UserAccountModel>(BankCollectionName);
-            return collection.Aggregate<UserAccountModel>().ToList();  
+            var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
+            return collection.Aggregate<UserAccountEntity>().ToList();  
         }
        
 
