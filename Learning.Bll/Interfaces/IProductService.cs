@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Learning.Dal.Models;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Bll.Interfaces
 {
@@ -12,7 +13,7 @@ namespace Learning.Bll.Interfaces
     {
         void InsertProduct(ProductInsertModel product);
         ProductEntity DeleteProduct(Guid productId);
-        ProductEntity UpdateProduct(Guid productId, ProductEntity product);
+        ProductEntity UpdateProduct(Guid productId, ProductPatchModel product);
         ProductEntity ReadProductById(Guid productId);
         List<ProductEntity> GetAllProducts();
     }

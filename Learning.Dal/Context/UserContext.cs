@@ -62,7 +62,7 @@ namespace Learning.Dal.Context
         /// update user in mongoDB
         /// </summary>
         /// <param name="user"></param>
-        public UserEntity UpdateUserInMongoDb(Guid userId, UserEntity user) 
+        public UserEntity UpdateUserInMongoDb(Guid userId, UserPatchModel user) 
         {
             var collection = _db.GetCollection<UserEntity>(UserCollectionName);
             var filter = Builders<UserEntity>.Filter.Eq("UserId", userId);

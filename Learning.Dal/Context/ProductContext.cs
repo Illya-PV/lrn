@@ -8,6 +8,7 @@ using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
 
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Context
 {
@@ -65,7 +66,7 @@ namespace Learning.Dal.Context
         /// update product to mongoDb
         /// </summary>
         /// <param name="product"></param>
-        public ProductEntity UpdateProductInMongoDb(Guid productId,ProductEntity product)
+        public ProductEntity UpdateProductInMongoDb(Guid productId,ProductPatchModel product)
         {
             var collection = _db.GetCollection<ProductEntity>(ProductCollectionName);
             var filter = Builders<ProductEntity>.Filter.Eq("ProductId", productId);

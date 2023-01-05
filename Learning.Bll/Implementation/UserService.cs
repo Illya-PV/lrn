@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Common.Models.InsertModels;
-
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -75,7 +75,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public UserEntity UpdateUser(Guid userId,UserEntity user) 
+        public UserEntity UpdateUser(Guid userId,UserPatchModel user) 
         {
             return _userContext.UpdateUserInMongoDb(userId,user);
              

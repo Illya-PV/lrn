@@ -1,4 +1,5 @@
 ﻿using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Learning.Dal.Intarfaces
     {
         void InsertUPPToMongoDb(UserPurchasedProductInsertModel intsertUserPuechasedProduct);
         UserPurchasedProductEntity DeleteUPPFromMongoDb(Guid userId);
-        UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId, UserPurchasedProductEntity userPurchasedProduct);
+        UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId, UserPurchasedProductPatchModel userPurchasedProduct);
         UserPurchasedProductEntity GetById(Guid userId);
         List<UserPurchasedProductEntity> GetAllList();
 

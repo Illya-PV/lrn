@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Intarfaces
 {
@@ -12,7 +13,7 @@ namespace Learning.Dal.Intarfaces
     {
         void InsertProductToMongoDb(ProductInsertModel product);
         ProductEntity DeleteProductFromMongoDb(Guid productId);
-        ProductEntity UpdateProductInMongoDb(Guid productId, ProductEntity product);
+        ProductEntity UpdateProductInMongoDb(Guid productId, ProductPatchModel product);
         ProductEntity GetProductById(Guid productId);
         List<ProductEntity> GetAllList();
     }

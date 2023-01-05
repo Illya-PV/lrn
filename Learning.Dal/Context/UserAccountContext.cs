@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
 using Learning.Dal.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Context
 {
@@ -37,7 +38,7 @@ namespace Learning.Dal.Context
               BankAccountId = Guid.NewGuid(),
               BankName = newBankAccount.BankName,
               IsLocked = false,
-              AmounOfMoney = newBankAccount.AmountOfMoney   
+              AmountOfMoney = newBankAccount.AmountOfMoney   
             }; 
             collection.InsertOne(userAccount);
 
@@ -59,13 +60,13 @@ namespace Learning.Dal.Context
         /// update bank by id, and change amount of money
         /// </summary>
         /// <param name="bank"></param>
-        public UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount)
+        public UserAccountEntity UpdateBank(Guid bankid, UserAccountPatchModel newUserAccount)
         {
             var collection = _db.GetCollection<UserAccountEntity>(BankCollectionName);
             var filter = Builders<UserAccountEntity>.Filter.Eq("BankAccountId", bankid);
-            var updateFilter = Builders<UserAccountEntity>.Update.Set("AmountOfMoney", newBankAccount.AmounOfMoney).
-                Set("IsLocked", newBankAccount.IsLocked).
-                Set("BankName", newBankAccount.BankName);
+            var updateFilter = Builders<UserAccountEntity>.Update.
+                Set("AmountOfMoney", newUserAccount.AmountOfMoney).
+                Set("BankName", newUserAccount.BankName);
             collection.UpdateOne(filter, updateFilter);
             return ReadBankById(bankid);    
         }

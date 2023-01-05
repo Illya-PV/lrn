@@ -1,5 +1,6 @@
 ﻿using Learning.Bll.Interfaces;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 using Learning.Dal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,35 +17,35 @@ namespace Learning.Api.Controllers
         {
             _userPurchasedProductService = userPurchasedProductService;
         }
-        [Route("create-upp")]
+        [Route("create-user-purchased-product")]
         [HttpPost]
         public IActionResult CreateUPP([FromBody] UserPurchasedProductInsertModel userPurchasedProduct)
         {
             _userPurchasedProductService.InsertUserPurchasedProduct(userPurchasedProduct);
             return new JsonResult(userPurchasedProduct);
         }
-        [Route("delete-upp")]
+        [Route("delete-user-purchased-product")]
         [HttpDelete]
         public IActionResult DeleteUPP(Guid userId)
         {
             var someUsersProduct = _userPurchasedProductService.DeleteUserPurchasedProduct(userId);
             return new JsonResult(someUsersProduct);
         }
-        [Route("update-upp")]
+        [Route("update-user-purchased-product")]
         [HttpPatch]
-        public IActionResult UpdateUPP(Guid userId, [FromBody] UserPurchasedProductEntity userPurchasedProduct)
+        public IActionResult UpdateUPP(Guid userId, [FromBody] UserPurchasedProductPatchModel userPurchasedProduct)
         {
             var someUsersProduct = _userPurchasedProductService.UpdateUserPurchasedProduct(userId, userPurchasedProduct);
             return new JsonResult(someUsersProduct);
         }
-        [Route("get-upp-by-id")]
+        [Route("get-user-purchased-product-by-id")]
         [HttpGet]
         public IActionResult ReadUPP(Guid userId)
         {
             var someUsersProduct = _userPurchasedProductService.GetById(userId);
             return new JsonResult(someUsersProduct);
         }
-        [Route("get-all")]
+        [Route("get-all-user-purchased-product")]
         [HttpGet]
         public IActionResult GetAll()
         {

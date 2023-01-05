@@ -9,6 +9,7 @@ using Learning.Dal.Context;
 using Learning.Bll.Interfaces;
 using Learning.Dal.Intarfaces;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -52,7 +53,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="UserPurchasedProduct"></param>
         /// <returns></returns>
-        public UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId,UserPurchasedProductEntity UserPurchasedProduct)
+        public UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId,UserPurchasedProductPatchModel UserPurchasedProduct)
         {
             return _uPP.UpdateUPPInMongoDb(userId,UserPurchasedProduct);  
         }

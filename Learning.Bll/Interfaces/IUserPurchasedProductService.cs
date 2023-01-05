@@ -1,4 +1,5 @@
 ﻿using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 using Learning.Dal.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Learning.Bll.Interfaces
     {
         void InsertUserPurchasedProduct(UserPurchasedProductInsertModel UserPurchasedProduct);
         UserPurchasedProductEntity DeleteUserPurchasedProduct(Guid userId);
-        UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId, UserPurchasedProductEntity UserPurchasedProduct);
+        UserPurchasedProductEntity UpdateUserPurchasedProduct(Guid userId, UserPurchasedProductPatchModel UserPurchasedProduct);
         UserPurchasedProductEntity GetById(Guid userId);
         List<UserPurchasedProductEntity> GetAllUserPurchasedProduct();
     }

@@ -14,7 +14,7 @@ namespace Learning.Dal.Models
     public class UserAccountEntity
     {
         public Guid BankAccountId { get; set; }
-        public int AmounOfMoney { get; set; }
+        public int AmountOfMoney { get; set; }
         public string BankName{ get; set; }
         public bool IsLocked { get; set; }
 

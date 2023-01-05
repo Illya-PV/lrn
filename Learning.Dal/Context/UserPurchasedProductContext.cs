@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Learning.Dal.Models;
 using Learning.Dal.Intarfaces;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Context
 {
@@ -16,7 +17,7 @@ namespace Learning.Dal.Context
 
         string connectionString = "mongodb+srv://illia_pv:localhost1617@cluster0.nvlushg.mongodb.net/test";
         string DBName = "EStore";
-        string UserPurchasedProductCollectionName = "userPuechasedProduct";
+        string UserPurchasedProductCollectionName = "userPurchasedProduct";
 
         public UserPurchasedProductContext()
         {
@@ -55,7 +56,7 @@ namespace Learning.Dal.Context
         /// update user`s purchased product to mongoDB
         /// </summary>
         /// <param name="userPuechasedProduct"></param>
-        public UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId,UserPurchasedProductEntity userPurchasedProduct)
+        public UserPurchasedProductEntity UpdateUPPInMongoDb(Guid userId,UserPurchasedProductPatchModel userPurchasedProduct)
         {
             var collection = _db.GetCollection<UserPurchasedProductEntity>(UserPurchasedProductCollectionName);
             var filter = Builders<UserPurchasedProductEntity>.Filter.Eq("UserId", userId);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Dal.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Dal.Intarfaces
 {
@@ -12,7 +13,7 @@ namespace Learning.Dal.Intarfaces
     {
         void InsertBank(UserAccountInsertModel newBankAccount);
         UserAccountEntity DeleteBank(Guid bankId);
-        UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount);
+        UserAccountEntity UpdateBank(Guid bankid, UserAccountPatchModel newUserAccount);
         UserAccountEntity ReadBankById(Guid bankid);
         UserAccountEntity GetByName(string BankName);
         List<UserAccountEntity> GetAllList();

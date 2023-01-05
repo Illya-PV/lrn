@@ -13,7 +13,7 @@ namespace Learning.Bll.Interfaces
     public interface IUserAccountService
     {
         void InsertBank(UserAccountInsertModel newBankAccount);
-        UserAccountEntity UpdateBank(Guid bankid, UserAccountEntity newBankAccount);
+        UserAccountEntity UpdateBank(Guid bankid, UserAccountPatchModel newBankAccount);
         UserAccountEntity DeleteBank(Guid userId);
         UserAccountEntity ReadBankById(Guid bankid);
         UserAccountEntity GetByName(string BankName);

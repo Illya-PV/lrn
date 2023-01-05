@@ -58,7 +58,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public UserPatchModel UpdateBank(Guid bankid, UserAccountEntity newBankAccount) 
+        public UserAccountEntity UpdateBank(Guid bankid, UserAccountPatchModel newBankAccount) 
         {
             return _bankContext.UpdateBank(bankid, newBankAccount);
              

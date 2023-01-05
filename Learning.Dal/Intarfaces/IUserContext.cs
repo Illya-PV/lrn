@@ -13,7 +13,7 @@ namespace Learning.Dal.Intarfaces
     {
         void InsertUserToMongoDb(UserInsertModel user);
         UserEntity DeleteUserFromMongoDb(Guid userId);
-        UserEntity UpdateUserInMongoDb(Guid userID, UserEntity user);
+        UserEntity UpdateUserInMongoDb(Guid userId, UserPatchModel user);
         UserEntity ReadUserById(Guid userId);
         List<UserEntity> GetAllList();
     }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 
 namespace Learning.Bll.Implementation
 {
@@ -68,7 +69,7 @@ namespace Learning.Bll.Implementation
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ProductEntity UpdateProduct(Guid productId,ProductEntity product) 
+        public ProductEntity UpdateProduct(Guid productId,ProductPatchModel product) 
         {
             return _productContext.UpdateProductInMongoDb(productId,product);
             

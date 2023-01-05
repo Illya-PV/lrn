@@ -1,5 +1,6 @@
 ﻿using Learning.Bll.Interfaces;
 using Learning.Common.Models.InsertModels;
+using Learning.Common.Models.PatchModels;
 using Learning.Dal.InsertModels;
 using Learning.Dal.Models;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +34,7 @@ namespace Learning.Api.Controllers
         }
         [Route("update-user")]
         [HttpPatch]
-        public IActionResult UpdateUser(Guid userId, [FromBody] UserEntity user) 
+        public IActionResult UpdateUser(Guid userId, [FromBody] UserPatchModel user) 
         { 
             var someUser = _userService.UpdateUser(userId,user);
             return new JsonResult(someUser);
